@@ -13,15 +13,15 @@ import java.util.List;
  * @author kuoyang.liang
  */
 public class DataItem {
-    private List<Double> features;
+    private List<DTFeature> features;
 
     private Integer label;
 
-    public List<Double> getFeatures() {
+    public List<DTFeature> getFeatures() {
         return features;
     }
 
-    public void setFeatures(List<Double> features) {
+    public void setFeatures(List<DTFeature> features) {
         this.features = features;
     }
 

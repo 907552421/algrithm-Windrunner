@@ -3,8 +3,6 @@ package leo.test.windrunner.DataStructure;
  * Created by kuoyang.liang on 2017/5/25.
  */
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.util.List;
 
 /**
@@ -19,11 +17,15 @@ public class TreeNode {
 
     private Double splitValue;
 
+    private Double value;
+
     private List<TreeNode> childNodes;
 
     private Boolean leaf;
 
     private Integer label;
+
+    private TreeNode parentTreeNode;
 
     public TreeNode() {
     }
@@ -34,6 +36,14 @@ public class TreeNode {
 
     public void setFeatureIndex(Integer featureIndex) {
         this.featureIndex = featureIndex;
+    }
+
+    public Double getValue() {
+        return value;
+    }
+
+    public void setValue(Double value) {
+        this.value = value;
     }
 
     public Double getSplitValue() {
@@ -66,5 +76,13 @@ public class TreeNode {
 
     public void setLabel(Integer label) {
         this.label = label;
+    }
+
+    public TreeNode getParentTreeNode() {
+        return parentTreeNode;
+    }
+
+    public void setParentTreeNode(TreeNode parentTreeNode) {
+        this.parentTreeNode = parentTreeNode;
     }
 }
