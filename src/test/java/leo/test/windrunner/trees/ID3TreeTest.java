@@ -23,8 +23,16 @@ public class ID3TreeTest {
     public void test() throws IOException {
         String trainFilePath = "D:\\Documents\\IdeaProjects\\algrithm-Windrunner\\data\\hw3_train.dat";
         List<DataItem> trainDataList = DataUtils.loadData(trainFilePath);
+
+        String testFilePath = "D:\\Documents\\IdeaProjects\\algrithm-Windrunner\\data\\hw3_test.dat";
+        List<DataItem> testDataList = DataUtils.loadData(testFilePath);
         ID3Tree id3Tree = new ID3Tree();
         id3Tree.train(trainDataList);
-        id3Tree.predict(trainDataList.get(0));
+        Integer predict = id3Tree.predict(trainDataList.get(0));
+        System.out.println(predict);
+
+        Double evaluate = id3Tree.evaluate(testDataList);
+        System.out.println(evaluate);
+
     }
 }

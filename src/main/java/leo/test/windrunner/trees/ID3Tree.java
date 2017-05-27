@@ -6,17 +6,15 @@ package leo.test.windrunner.trees;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.sun.corba.se.spi.legacy.connection.LegacyServerSocketEndPointInfo;
 import leo.test.windrunner.DataStructure.DTFeature;
 import leo.test.windrunner.DataStructure.DataItem;
 import leo.test.windrunner.DataStructure.TreeNode;
-import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.*;
 
 /**
  * ClassName: ID3Tree<br/>
- * Function: TODO ADD FUNCTION. <br/>
+ * Function: ID3 Decision Tree. <br/>
  * Date:     2017/5/25 <br/>
  *
  * @author kuoyang.liang
@@ -58,14 +56,14 @@ public class ID3Tree {
             return treeNode.getLabel();
         }
         DTFeature dtFeature = dataItem.getFeatures().get(treeNode.getFeatureIndex());
-        if(dtFeature.getFeatureType().equals(DTFeature.FeatureType.CONTINUOUS)){
+        if(dtFeature.getFeatureType().equals(DTFeature.FeatureType.CONTINUOUS)){//连续值
             if ( dataItem.getFeatures().get(treeNode.getFeatureIndex()).getValue() < treeNode.getSplitValue() ){
                 return this.predict(treeNode.getChildNodes().get(0),dataItem);
             }else{
                 return this.predict(treeNode.getChildNodes().get(1),dataItem);
             }
         }else{
-            for (TreeNode childNode : treeNode.getChildNodes()) {
+            for (TreeNode childNode : treeNode.getChildNodes()) {//离散值
                 if(childNode.getValue().equals(dataItem.getFeatures().get(treeNode.getFeatureIndex()))){
                     return this.predict(childNode,dataItem);
                 }
@@ -73,6 +71,23 @@ public class ID3Tree {
         }
 
         throw new RuntimeException("error");
+    }
+
+    public Double evaluate(List<DataItem> dataItemList){
+        return this.evalute(this.rootNode,dataItemList);
+    }
+
+    private Double evalute(TreeNode node,List<DataItem> dataItemList){
+        Double precision = 0.0;
+        Integer correctCount = 0;
+        for (DataItem dataItem : dataItemList) {
+            Integer predict = this.predict(dataItem);
+            if(predict.equals(dataItem.getLabel())){
+                correctCount ++;
+            }
+        }
+        precision = correctCount*1.0/dataItemList.size()*1.0;
+        return precision;
     }
 
 
@@ -93,7 +108,7 @@ public class ID3Tree {
                     negaCount++;
                 }
             }
-            label = posiCount >= negaCount ? posiCount : negaCount;
+            label = posiCount >= negaCount ? 1 : -1;
 
             node.setLabel(label);
             return node;
@@ -116,20 +131,14 @@ public class ID3Tree {
                     DTFeature.FeatureType.CONTINUOUS)) {//连续特征
 
                 List<Double> cSegList = this.getCandidateSegmentValue(totalDataList, i);
-                Double curMaxFeatureInfoGain = 0.0;
                 for (Double segValue : cSegList) {
                     Double informationGain = this.getInformationGain(totalDataList, i, totalDataList.get(0).getFeatures().get(i).getFeatureType(), segValue);
-                    if(informationGain > curMaxFeatureInfoGain){
-                        curMaxFeatureInfoGain = informationGain;
+                    if(informationGain > maxInformationGain){
+                        maxInformationGain = informationGain;
                         node.setSplitValue(segValue);
+                        bestFeatureIndex = i;
                     }
                 }
-
-                if(maxInformationGain< curMaxFeatureInfoGain){
-                    maxInformationGain = curMaxFeatureInfoGain;
-                    bestFeatureIndex = i;
-                }
-
             } else { //离散特征
                 if (parentFeatureIndex.contains(i))
                     continue;
@@ -259,7 +268,7 @@ public class ID3Tree {
             double lessThanEntropy = this.computeEntropy(lessThanDataList);
             double greaterThanEntropy = this.computeEntropy(greaterThanDataList);
             sumOfEntropy = ((lessThanDataList.size()* 1.0 )/totalDataList.size() * 1.0)* lessThanEntropy +
-                    ((greaterThanDataList.size()*1.0)/greaterThanDataList.size() * 1.0)* greaterThanEntropy;
+                    ((greaterThanDataList.size()*1.0)/totalDataList.size() * 1.0)* greaterThanEntropy;
         }
 
         Double informationGain = parentEntropy - sumOfEntropy;
