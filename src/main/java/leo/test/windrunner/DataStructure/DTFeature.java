@@ -5,7 +5,7 @@ package leo.test.windrunner.DataStructure;
 
 /**
  * ClassName: DTFeature<br/>
- * Function: TODO ADD FUNCTION. <br/>
+ * Function: DTFeature. <br/>
  * Date:     2017/5/26 <br/>
  *
  * @author kuoyang.liang

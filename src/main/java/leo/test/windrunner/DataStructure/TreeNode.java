@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * ClassName: TreeNode<br/>
- * Function: TODO ADD FUNCTION. <br/>
+ * Function: TreeNode. <br/>
  * Date:     2017/5/25 <br/>
  *
  * @author kuoyang.liang

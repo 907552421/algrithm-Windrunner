@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * ClassName: ID3TreeTest<br/>
- * Function: TODO ADD FUNCTION. <br/>
+ * Function: ID3TreeTest. <br/>
  * Date:     2017/5/26 <br/>
  *
  * @author kuoyang.liang

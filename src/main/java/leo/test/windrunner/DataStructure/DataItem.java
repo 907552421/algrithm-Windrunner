@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * ClassName: DataItem<br/>
- * Function: TODO ADD FUNCTION. <br/>
+ * Function: DataItem. <br/>
  * Date:     2017/5/25 <br/>
  *
  * @author kuoyang.liang

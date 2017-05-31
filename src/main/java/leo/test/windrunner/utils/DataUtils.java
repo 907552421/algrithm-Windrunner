@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * ClassName: DataUtils<br/>
- * Function: TODO ADD FUNCTION. <br/>
+ * Function: DataUtils. <br/>
  * Date:     2017/5/26 <br/>
  *
  * @author kuoyang.liang

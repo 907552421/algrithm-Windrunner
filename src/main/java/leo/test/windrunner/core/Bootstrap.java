@@ -5,7 +5,7 @@ package leo.test.windrunner.core;
 
 /**
  * ClassName: Bootstrap<br/>
- * Function: TODO ADD FUNCTION. <br/>
+ * Function: Bootstrap. <br/>
  * Date:     2017/5/25 <br/>
  *
  * @author kuoyang.liang

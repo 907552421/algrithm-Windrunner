@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * ClassName: ID3RandomForestTest<br/>
- * Function: TODO ADD FUNCTION. <br/>
+ * Function: ID3RandomForestTest. <br/>
  * Date:     2017/5/27 <br/>
  *
  * @author kuoyang.liang
